@@ -1,6 +1,5 @@
-from curses.ascii import SI
 from enum import Enum, auto
-from color import Color, COLOR_CODES, COLOR_TO_CUBE_CODE
+from .color import Color, COLOR_CODES, COLOR_TO_CUBE_CODE
 
 class Side(Enum):
     FRONT = auto()
@@ -20,7 +19,7 @@ class Cube:
         self.bottom = self.__validate(bottom)
 
     def __getitem__(self, side: Side):
-        if isinstance(side, Side):
+        if not isinstance(side, Side):
             raise TypeError("side must be Side enum")
 
         if side == Side.FRONT:
@@ -47,13 +46,13 @@ class Cube:
 
     def __to_cube_code(self, colors):
         converted = [COLOR_TO_CUBE_CODE[cur_color] for cur_color in colors]
-        return str.join(converted)
+        return "".join(converted)
 
     def __validate(self, input):
         if len(input) != 9:
             raise TypeError("The vector %s needs to have 9 items" % input)
 
-        if not all([isinstance(Color, cur_color) for cur_color in input]):
+        if not all([isinstance(cur_color, Color) for cur_color in input]):
             raise TypeError("The vector %s must contain only Color" % input)
 
         return input
