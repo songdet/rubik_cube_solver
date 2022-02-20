@@ -66,10 +66,10 @@ def test_different_colors():
     assert cube[Side.BOTTOM] == [Color.ORANGE] * 9
 
 def test_get_cube_code():
-    cube = Cube(front = [Color.RED] * 9,
-                back =  [Color.BLUE] * 9,
+    cube = Cube(front = "RYOWGBRYO",
+                back =  "OYRBGWOYR",
                 left = [Color.GREEN] * 9,
                 right = [Color.WHITE] *9,
                 top = [Color.YELLOW] * 9,
                 bottom = [Color.ORANGE] * 9)
-    assert cube.get_cube_code() == "DDDDDDDDDUUUUUUUUURRRRRRRRRLLLLLLLLLFFFFFFFFFBBBBBBBBB"
+    assert cube.get_cube_code() == "DDDDDDDDDUUUUUUUUURDLUFBRDLLLLLLLLLLFFFFFFFFFLDRBFULDR"
