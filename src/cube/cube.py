@@ -1,6 +1,6 @@
 from curses.ascii import SI
 from enum import Enum, auto
-from color import COLOR_CODES, COLOR_TO_CUBE
+from color import Color, COLOR_CODES, COLOR_TO_CUBE_CODE
 
 class Side(Enum):
     FRONT = auto()
@@ -12,12 +12,12 @@ class Side(Enum):
 
 class Cube:
     def __init__(self, front, back, left, right, top, bottom):
-        self.front = self.__convert_code(self.__validate(front))
-        self.back = self.__convert_code(self.__validate(back))
-        self.left = self.__convert_code(self.__validate(left))
-        self.right = self.__convert_code(self.__validate(right))
-        self.top = self.__convert_code(self.__validate(top))
-        self.bottom = self.__convert_code(self.__validate(bottom))
+        self.front = self.__validate(front)
+        self.back = self.__validate(back)
+        self.left = self.__validate(left)
+        self.right = self.__validate(right)
+        self.top = self.__validate(top)
+        self.bottom = self.__validate(bottom)
 
     def __getitem__(self, side: Side):
         if isinstance(side, Side):
@@ -37,18 +37,23 @@ class Cube:
             return self.bottom
 
 
-    def __str__(self):
-        return self.top + self.right + self.front + self.bottom + self.left + self.back
+    def get_cube_code(self):
+        return self.__to_cube_code(self.top) \
+             + self.__to_cube_code(self.right) \
+             + self.__to_cube_code(self.front) \
+             + self.__to_cube_code(self.bottom) \
+             + self.__to_cube_code(self.left) \
+             + self.__to_cube_code(self.back)
 
-    def __convert_code(self, cstring):
-        converted = [COLOR_TO_CUBE[cur_char] for cur_char in cstring]
+    def __to_cube_code(self, colors):
+        converted = [COLOR_TO_CUBE_CODE[cur_color] for cur_color in colors]
         return str.join(converted)
 
-    def __validate(self, cstring):
-        if len(cstring) != 9:
-            raise ValueError("The string %s does not have 9 characters" % cstring)
+    def __validate(self, input):
+        if len(input) != 9:
+            raise TypeError("The vector %s needs to have 9 items" % input)
 
-        if not all([cur_char in COLOR_CODES for cur_char in cstring]):
-            raise ValueError("The string %s contain invalid code" % cstring)
+        if not all([isinstance(Color, cur_color) for cur_color in input]):
+            raise TypeError("The vector %s must contain only Color" % input)
 
-        return cstring
+        return input
