@@ -1,5 +1,5 @@
 from enum import Enum, auto
-from .color import Color, COLOR_CODES, COLOR_TO_CUBE_CODE
+from .color import Color, COLOR_CODES, COLOR_CODE_TO_COLOR, COLOR_TO_CUBE_CODE
 
 class Side(Enum):
     FRONT = auto()
@@ -11,12 +11,12 @@ class Side(Enum):
 
 class Cube:
     def __init__(self, front, back, left, right, top, bottom):
-        self.front = self.__validate(front)
-        self.back = self.__validate(back)
-        self.left = self.__validate(left)
-        self.right = self.__validate(right)
-        self.top = self.__validate(top)
-        self.bottom = self.__validate(bottom)
+        self.front = self.__convert(self.__validate(front))
+        self.back = self.__convert(self.__validate(back))
+        self.left = self.__convert(self.__validate(left))
+        self.right = self.__convert(self.__validate(right))
+        self.top = self.__convert(self.__validate(top))
+        self.bottom = self.__convert(self.__validate(bottom))
 
     def __getitem__(self, side: Side):
         if not isinstance(side, Side):
@@ -48,11 +48,21 @@ class Cube:
         converted = [COLOR_TO_CUBE_CODE[cur_color] for cur_color in colors]
         return "".join(converted)
 
+    def __convert(self, input):
+        if isinstance(input[0], Color):
+            return input
+        return [COLOR_CODE_TO_COLOR[cur_color] for cur_color in input]
+
     def __validate(self, input):
         if len(input) != 9:
-            raise TypeError("The vector %s needs to have 9 items" % input)
+            raise TypeError("The input %s needs to have 9 items" % input)
 
-        if not all([isinstance(cur_color, Color) for cur_color in input]):
-            raise TypeError("The vector %s must contain only Color" % input)
-
+        is_all_color = all([isinstance(cur_color, Color) for cur_color in input])
+        is_all_string = all([isinstance(cur_color, str) for cur_color in input])
+        if not is_all_color and not is_all_string:
+            raise TypeError("The input %s must contain either all Color or all strings" % input)
+        
+        if is_all_string and not all(color in COLOR_CODES for color in input):
+            raise TypeError("The input %s contains invalid color code" % input)
+            
         return input

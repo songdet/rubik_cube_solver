@@ -26,3 +26,4 @@ class Color(Enum):
 COLOR_CODES = [color.get_color_code() for color in Color] 
 CUBE_CODES = [color.get_cube_code() for color in Color]
 COLOR_TO_CUBE_CODE = {color : color.get_cube_code() for color in Color}
+COLOR_CODE_TO_COLOR = {color.get_color_code() : color for color in Color}
