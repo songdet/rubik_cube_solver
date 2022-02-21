@@ -17,6 +17,9 @@ class Color(Enum):
         self._color_code_ = color_code
         self._cube_code_ = cube_code
     
+    def __str__(self) -> str:
+        return self.value
+    
     def get_color_code(self):
         return self._color_code_
 
