@@ -31,7 +31,7 @@ def convert(solution: str):
         # Check first if we need to rotate the cube and correct for that
         cur_solution = rotated_solution[i] if is_rotated else solution[i]
         if 'F' in cur_solution or 'B' in cur_solution:
-            isa_list.append(Isa.MVHCW) if is_rotated else isa_list.append(Isa.MVHCCW)
+            isa_list.append(Isa.MVHCCW) if is_rotated else isa_list.append(Isa.MVHCW)
             is_rotated = not is_rotated
             cur_solution = rotated_solution[i] if is_rotated else solution[i]
 
