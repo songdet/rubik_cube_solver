@@ -30,3 +30,18 @@ def test_red_detect():
     assert result == [Color.RED, Color.RED, Color.RED, 
                       Color.RED, Color.RED, Color.RED,
                       Color.RED, Color.RED, Color.RED]
+
+def test_orange_detect():
+    bounds = [(1055, 1430, 1290, 1665),
+              (1360, 1430, 1590, 1665),
+              (1660, 1430, 1890, 1665),
+              (1065, 1735,1290, 1950),
+              (1360, 1735, 1590, 1950),
+              (1660, 1735, 1890, 1950),
+              (1065, 2020, 1290, 2230),
+              (1360, 2020, 1590, 2230),
+              (1660, 2020, 1890, 2230)]
+    result = detect("tests/color_detection/cube_orange.jpg", bounds)
+    assert result == [Color.ORANGE, Color.ORANGE, Color.ORANGE, 
+                      Color.ORANGE, Color.ORANGE, Color.ORANGE,
+                      Color.ORANGE, Color.ORANGE, Color.ORANGE]
