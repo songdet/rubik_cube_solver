@@ -45,3 +45,48 @@ def test_orange_detect():
     assert result == [Color.ORANGE, Color.ORANGE, Color.ORANGE, 
                       Color.ORANGE, Color.ORANGE, Color.ORANGE,
                       Color.ORANGE, Color.ORANGE, Color.ORANGE]
+
+def test_blue_detect():
+    bounds = [(1100, 1450, 1340, 1695),
+              (1420, 1450, 1655, 1695),
+              (1730, 1450, 1970, 1695),
+              (1100, 1765,1340, 1990),
+              (1420, 1765, 1655, 1990),
+              (1730, 1765, 1970, 1990),
+              (1100, 2060, 1340, 2275),
+              (1420, 2060, 1655, 2275),
+              (1730, 2060, 1970, 2275)]
+    result = detect("tests/color_detection/cube_blue.jpg", bounds)
+    assert result == [Color.BLUE, Color.BLUE, Color.BLUE, 
+                      Color.BLUE, Color.BLUE, Color.BLUE,
+                      Color.BLUE, Color.BLUE, Color.BLUE]
+
+def test_white_detect():
+    bounds = [(985, 1375, 1230, 1630),
+              (1310, 1375, 1555, 1630),
+              (1635, 1375, 1880, 1630),
+              (1000, 1705,1240, 1935),
+              (1310, 1705, 1555, 1935),
+              (1635, 1705, 1880, 1935),
+              (1000, 2005, 1240, 2225),
+              (1310, 2005, 1555, 2225),
+              (1635, 2005, 1880, 2225)]
+    result = detect("tests/color_detection/cube_white.jpg", bounds)
+    assert result == [Color.WHITE, Color.WHITE, Color.WHITE, 
+                      Color.WHITE, Color.WHITE, Color.WHITE,
+                      Color.WHITE, Color.WHITE, Color.WHITE]
+
+def test_yellow_detect():
+    bounds = [(1005, 1315, 1245, 1565),
+              (1325, 1315, 1565, 1565),
+              (1640, 1315, 1885, 1565),
+              (1025, 1635,1255, 1870),
+              (1330, 1635, 1570, 1870),
+              (1640, 1635, 1885, 1870),
+              (1025, 1940, 1255, 2160),
+              (1330, 1940, 1570, 2160),
+              (1640, 1940, 1885, 2160)]
+    result = detect("tests/color_detection/cube_yellow.jpg", bounds)
+    assert result == [Color.YELLOW, Color.YELLOW, Color.YELLOW, 
+                      Color.YELLOW, Color.YELLOW, Color.YELLOW,
+                      Color.YELLOW, Color.YELLOW, Color.YELLOW]
