@@ -1,4 +1,3 @@
-import pytest
 from solver import Isa
 from solver import rcn_to_isa
 

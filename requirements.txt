@@ -1,9 +1,11 @@
 attrs==21.4.0
 cffi==1.15.0
+colorthief==0.2.1
 future==0.18.2
 iniconfig==1.1.1
 kociemba==1.2.1
 packaging==21.3
+Pillow==9.0.1
 pluggy==1.0.0
 py==1.11.0
 pycparser==2.21
