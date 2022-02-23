@@ -5,12 +5,12 @@ from math import sqrt
 from tempfile import NamedTemporaryFile
 
 COLOR_BOUNDS = {
-    Color.BLUE: (20, 45, 70),
-    Color.GREEN: (10, 75, 30),
-    Color.ORANGE: (150, 50, 15),
-    Color.RED: (100, 30, 10),
-    Color.WHITE: (150, 140, 120),
-    Color.YELLOW: (130, 130, 40)
+    Color.BLUE: (10, 95, 180),
+    Color.GREEN: (5, 140, 30),
+    Color.ORANGE: (225, 80, 60),
+    Color.RED: (160, 45, 55),
+    Color.WHITE: (145, 160, 175),
+    Color.YELLOW: (130, 175, 35)
 }
 
 def detect(img_file, bounds):
