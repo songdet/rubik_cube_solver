@@ -8,6 +8,8 @@ future==0.18.2
 idna==3.3
 iniconfig==1.1.1
 kociemba==1.2.1
+numpy==1.22.3
+opencv-python==4.5.5.64
 packaging==21.3
 Pillow==9.0.1
 pluggy==1.0.0
