@@ -2,7 +2,7 @@ from solver import solve
 from cube import Cube
 
 print("====================================================================================")
-print("Orient the cube with (middle) green side facing you and (middle) top side facing up")
+print("Orient the cube with (middle) green side facing you and (middle) white side facing up")
 print("The color codes are [red = R], [yellow = Y], [white = W], [orange = O], [blue = B], [green = G]")
 print("====================================================================================\n")
 

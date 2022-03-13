@@ -1,6 +1,6 @@
 import requests
 
-def take_photo(ip_address, port, img_file):
+def take_photo(ip_address, img_file, port="80"):
 
     # Synthesize the url to take photo from
     image_url = "http://" + str(ip_address) + ":" + str(port) + "/capture"

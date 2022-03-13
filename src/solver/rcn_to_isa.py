@@ -1,17 +1,17 @@
 from solver.isa import Isa
 
 SOLUTION_TO_ISA = {
-    "R": [Isa.RRC],
+    "R": [Isa.RLC],
     "U": [Isa.RTC],
-    "L": [Isa.RLC],
+    "L": [Isa.RRC],
     "D": [Isa.RBC],
-    "R'": [Isa.RRCCW],
+    "R'": [Isa.RLCCW],
     "U'": [Isa.RTCCW],
-    "L'": [Isa.RLCCW],
+    "L'": [Isa.RRCCW],
     "D'": [Isa.RBCCW],
-    "R2": [Isa.RRC, Isa.RRC],
+    "R2": [Isa.RLC, Isa.RLC],
     "U2": [Isa.RTC, Isa.RTC],
-    "L2": [Isa.RLC, Isa.RLC],
+    "L2": [Isa.RRC, Isa.RRC],
     "D2": [Isa.RBC, Isa.RBC]
 }
 
