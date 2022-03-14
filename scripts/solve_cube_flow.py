@@ -104,6 +104,7 @@ if __name__ == "__main__":
     try:
         # Create a temporary file that will be used to store images throughout the program
         Path(TMP_IMAGE_FILE).touch()
+        is_error = False
 
         # Print welcome message
         print("\n====================================================================================")
@@ -154,7 +155,10 @@ if __name__ == "__main__":
 
     except Exception as e:
         print("Error while executing: %s", str(e), file=sys.stderr)
-        exit(1)
+        is_error = True
+    finally:
+        # Make sure the temporary file is removed before exiting
+        os.remove(TMP_IMAGE_FILE)
 
-    # Make sure the temporary file is removed before exiting
-    os.remove(TMP_IMAGE_FILE)
+    if is_error:
+        exit(1)
