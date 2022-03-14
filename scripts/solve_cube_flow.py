@@ -4,21 +4,29 @@ from cube import Color, Cube
 from solver import solve
 from color_detection import get_color_bound, detect
 from pathlib import Path
-import sys, os
+import sys, os, pickle
 
 IMAGE_BOUND = [
-    (675, 465, 730, 520),
-    (755, 470, 810, 520),
-    (835, 475, 890, 525),
-    (675, 550, 725, 595),
-    (755, 550, 805, 600),
-    (835, 555, 890, 605),
-    (675, 630, 725, 680),
-    (750, 630, 805, 685),
-    (835, 640, 895, 685)
+    (770, 440, 825, 495),
+    (850, 445, 905, 500),
+    (935, 445, 995, 500),
+    (770, 520, 825, 580),
+    (850, 525, 905, 580),
+    (935, 530, 990, 590),
+    (765, 600, 820, 660),
+    (850, 610, 905, 665),
+    (935, 615, 990, 670)
 ]
 
 TMP_IMAGE_FILE = "/tmp/img_file.jpg"
+TMP_BOUND_FILE = "/tmp/image_bound.txt"
+
+def get_default_color_bound():
+    if not os.path.exists(TMP_BOUND_FILE):
+        return DEFAULT_COLOR_BOUNDS
+    with open(TMP_BOUND_FILE, 'rb') as f:
+        return pickle.load(f)
+    
 
 def calibrate(camera_ip):
     input("Orient GREEN side towards the camera and press enter")
@@ -106,14 +114,18 @@ if __name__ == "__main__":
         print()
 
         # Get camera ip address
-        #camera_ip = input("Please enter the ip address of the camera: ")
-        camera_ip = "192.168.1.189"
+        camera_ip = input("Please enter the ip address of the camera: ")
 
         # Calibrate the cube colors
         print("====================================================================================")
         print("                                CALIBRATION PHASE                                   ")
         should_calibrate = input("Do you want to calibrate the cube colors? If not, defaults will be used ([y]/n): ")
-        color_bounds = DEFAULT_COLOR_BOUNDS if should_calibrate == "n" else calibrate(camera_ip)
+        if should_calibrate == "n":
+            color_bounds = get_default_color_bound()
+        else:
+            color_bounds = calibrate(camera_ip)
+            with open(TMP_BOUND_FILE, "wb") as f:
+                pickle.dump(color_bounds, f)
         print("The following bounds will be used: ")
         print("GREEN: %s" % str(color_bounds[Color.GREEN]))
         print("ORANGE: %s" % str(color_bounds[Color.ORANGE]))
