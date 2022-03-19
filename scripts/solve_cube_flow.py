@@ -6,16 +6,19 @@ from color_detection import get_color_bound, detect
 from pathlib import Path
 import sys, os, pickle
 
-IMAGE_BOUND = [
-    (770, 440, 825, 495),
-    (850, 445, 905, 500),
-    (935, 445, 995, 500),
-    (770, 520, 825, 580),
-    (850, 525, 905, 580),
-    (935, 530, 990, 590),
-    (765, 600, 820, 660),
-    (850, 610, 905, 665),
-    (935, 615, 990, 670)
+IMAGE_BOUND_VERTICAL = [
+    (770, 445, 830, 500),
+    (935, 450, 995, 505),
+    (770, 525, 825, 580),
+    (850, 530, 910, 590),
+    (935, 535, 995, 590),
+    (770, 610, 825, 665),
+    (935, 620, 995, 670)
+]
+
+IMAGE_BOUND_HORIZONTAL = [
+    (850, 445, 910, 505),
+    (850, 615, 910, 675)
 ]
 
 TMP_IMAGE_FILE = "/tmp/img_file.jpg"
@@ -58,31 +61,19 @@ def calibrate(camera_ip):
 
 def get_and_print_img_bound(camera_ip, color):
     take_photo(camera_ip, TMP_IMAGE_FILE)
-    (boxed_color, color_bound) = get_color_bound(TMP_IMAGE_FILE, IMAGE_BOUND)
+    (boxed_color, color_bound) = get_color_bound(TMP_IMAGE_FILE, IMAGE_BOUND_VERTICAL)
     print("Boxed values: %s" % str(boxed_color))
     print("%s bound: %s" % (str(color).capitalize(), str(color_bound)))
     return color_bound
     
 def detect_cube_colors(camera_ip, color_bounds):
 
-    input("Place the GREEN (front) side towards the camera and WHITE side (top) towards the top and press enter")
-    front_side = detect_and_print_color(camera_ip, color_bounds)
-
-    input("Rotate the cube counterclockwise so the ORANGE (left) side faces the camera and press enter")
-    left_side = detect_and_print_color(camera_ip, color_bounds)
-
-    input("Rotate the cube counterclockwise so the BLUE (back) side faces the camera and press enter")
-    back_side = detect_and_print_color(camera_ip, color_bounds)
-
-    input("Rotate the cube counterclockwise so the RED (right) side faces the camera and press enter")
-    right_side = detect_and_print_color(camera_ip, color_bounds)
-
-    input("Rotate the cube counterclockwise one more time so we are back to green and rotate WHITE side (top) down and press enter")
-    top_side = detect_and_print_color(camera_ip, color_bounds)
-
-    input("Rotate the cube counterclockwise in vertical plane twice so the YELLOW side (bottom) faces camera and press enter")
-    bottom_side = detect_and_print_color(camera_ip, color_bounds)
-
+    front_side = detect_and_print_color(camera_ip, color_bounds, "Place the GREEN (front) side towards the camera and WHITE side (top) towards the top and press enter")
+    left_side = detect_and_print_color(camera_ip, color_bounds, "Rotate the cube counterclockwise so the ORANGE (left) side faces the camera and press enter")
+    back_side = detect_and_print_color(camera_ip, color_bounds, "Rotate the cube counterclockwise so the BLUE (back) side faces the camera and press enter")
+    right_side = detect_and_print_color(camera_ip, color_bounds, "Rotate the cube counterclockwise so the RED (right) side faces the camera and press enter")
+    top_side = detect_and_print_color(camera_ip, color_bounds, "Rotate the cube counterclockwise one more time so we are back to green and rotate WHITE side (top) down and press enter")
+    bottom_side = detect_and_print_color(camera_ip, color_bounds, "Rotate the cube counterclockwise in vertical plane twice so the YELLOW side (bottom) faces camera and press enter")
     return Cube(
         front = front_side,
         left = left_side,
@@ -92,9 +83,24 @@ def detect_cube_colors(camera_ip, color_bounds):
         bottom = bottom_side
     )
 
-def detect_and_print_color(camera_ip, color_bounds):
+def detect_and_print_color(camera_ip, color_bounds, first_prompt):
+
+    # First detect the colors with vertical grippers in the way
+    input(first_prompt)
     take_photo(camera_ip, TMP_IMAGE_FILE)
-    detected_colors = detect(TMP_IMAGE_FILE, IMAGE_BOUND, color_bounds) 
+    detected_colors_vertical = detect(TMP_IMAGE_FILE, IMAGE_BOUND_VERTICAL, color_bounds) 
+
+    # Now detect the colors with horizontal grippers int he way
+    input("Now move the horizontal gripper into place and move vertical gripper out of the way and press enter.")
+    take_photo(camera_ip, TMP_IMAGE_FILE)
+    detected_colors_horizontal = detect(TMP_IMAGE_FILE, IMAGE_BOUND_HORIZONTAL, color_bounds)
+
+    # Combine the detected colors
+    detected_colors = detected_colors_vertical.copy()
+    detected_colors.insert(1, detected_colors_horizontal[0])
+    detected_colors.insert(7, detected_colors_horizontal[1])
+
+    # Print out the detected values
     print("[%s %s %s]" % (detected_colors[0].get_color_code(), detected_colors[1].get_color_code(), detected_colors[2].get_color_code()))
     print("[%s %s %s]" % (detected_colors[3].get_color_code(), detected_colors[4].get_color_code(), detected_colors[5].get_color_code()))
     print("[%s %s %s]" % (detected_colors[6].get_color_code(), detected_colors[7].get_color_code(), detected_colors[8].get_color_code()))
