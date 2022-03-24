@@ -8,17 +8,17 @@ import sys, os, pickle
 
 IMAGE_BOUND_VERTICAL = [
     (260, 75, 415, 230),
+    (475, 100, 625, 245),
     (680, 110, 820, 255),
     (245, 295, 400, 440),
     (465, 315, 610, 460),
     (665, 315, 805, 455),
     (225, 500, 380, 640),
+    (440, 510, 585, 650),
     (645, 515, 785, 650)    
 ]
 
 IMAGE_BOUND_HORIZONTAL = [
-    (475, 100, 625, 245),
-    (440, 510, 585, 650),
 ]
 
 TMP_IMAGE_FILE = "/tmp/img_file.jpg"
@@ -91,14 +91,14 @@ def detect_and_print_color(camera_ip, color_bounds, first_prompt):
     detected_colors_vertical = detect(TMP_IMAGE_FILE, IMAGE_BOUND_VERTICAL, color_bounds) 
 
     # Now detect the colors with horizontal grippers int he way
-    input("Now move the horizontal gripper into place and move vertical gripper out of the way and press enter.")
-    take_photo(camera_ip, TMP_IMAGE_FILE)
-    detected_colors_horizontal = detect(TMP_IMAGE_FILE, IMAGE_BOUND_HORIZONTAL, color_bounds)
+    #input("Now move the horizontal gripper into place and move vertical gripper out of the way and press enter.")
+    #take_photo(camera_ip, TMP_IMAGE_FILE)
+    #detected_colors_horizontal = detect(TMP_IMAGE_FILE, IMAGE_BOUND_HORIZONTAL, color_bounds)
 
     # Combine the detected colors
     detected_colors = detected_colors_vertical.copy()
-    detected_colors.insert(1, detected_colors_horizontal[0])
-    detected_colors.insert(7, detected_colors_horizontal[1])
+    #detected_colors.insert(1, detected_colors_horizontal[0])
+    #detected_colors.insert(7, detected_colors_horizontal[1])
 
     # Print out the detected values
     print("[%s %s %s]" % (detected_colors[0].get_color_code(), detected_colors[1].get_color_code(), detected_colors[2].get_color_code()))
