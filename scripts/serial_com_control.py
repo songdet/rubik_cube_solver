@@ -41,6 +41,6 @@ while True:
         print("Left and right grippers should now be turning with speed %s" % speed)
 
     # print wait for next command
-    print("====================================================================================")
+    print("\n====================================================================================")
     print("Waiting for the next button to be pushed")
     print("====================================================================================\n")
