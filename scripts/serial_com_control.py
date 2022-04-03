@@ -36,9 +36,9 @@ while True:
 
     # Print out confirmation that command was sent
     if selected_button == Button.A:
-        print("Top and bottom grippers should now be turning with speed %d" % speed)
+        print("Top and bottom grippers should now be turning with speed %s" % speed)
     else:
-        print("Left and right grippers should now be turning with speed %d" % speed)
+        print("Left and right grippers should now be turning with speed %s" % speed)
 
     # print wait for next command
     print("====================================================================================")
