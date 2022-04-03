@@ -27,7 +27,7 @@ while True:
 
     # Prompt for the speed with which to turn the servo motor
     speed = input("Select a speed for the motor between 1 (slowest) to 100 (highest). A value of 0 means unlimited speed: ")
-    while speed < 0 or speed > 100:
+    while not speed.isdigit() and (int(speed) < 0 or int(speed) > 100):
         speed = input("Invalid input. Try selecting a value between 0-100: ")
     write_byte = int(speed).to_bytes(1, 'little')
 
