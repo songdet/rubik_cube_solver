@@ -26,9 +26,9 @@ while True:
         selected_button = Button.B
 
     # Prompt for the speed with which to turn the servo motor
-    speed = input("Select a speed for the motor between 1 (slowest) to 100 (highest). A value of 0 means unlimited speed: ")
-    while not speed.isdigit() or int(speed) < 0 or int(speed) > 100:
-        speed = input("Invalid input. Try selecting a value between 0-100: ")
+    speed = input("Select a speed for the motor between 1 (slowest) to 65 (highest). A value of 0 means unlimited speed: ")
+    while not speed.isdigit() or int(speed) < 0 or int(speed) > 65:
+        speed = input("Invalid input. Try selecting a value between 0-65: ")
     write_byte = int(speed).to_bytes(1, 'little')
 
     # Send back command to test receiver
