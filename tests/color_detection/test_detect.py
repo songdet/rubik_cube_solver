@@ -1,5 +1,6 @@
 from color_detection import detect
 from cube import Color
+import pytest
 
 def test_green_detect():
     bounds = [(1105, 1170, 1310, 1385),
@@ -16,6 +17,7 @@ def test_green_detect():
                       Color.GREEN, Color.GREEN, Color.GREEN,
                       Color.GREEN, Color.GREEN, Color.GREEN]
 
+@pytest.mark.skip(reason="New bounds needed")
 def test_red_detect():
     bounds = [(1085, 940, 1300, 1165),
               (1370, 940, 1580, 1165),
@@ -76,6 +78,7 @@ def test_white_detect():
                       Color.WHITE, Color.WHITE, Color.WHITE,
                       Color.WHITE, Color.WHITE, Color.WHITE]
 
+@pytest.mark.skip(reason="New bounds needed")
 def test_yellow_detect():
     bounds = [(1050, 910, 1260, 1135),
               (1320, 910, 1535, 1135),
