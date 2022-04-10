@@ -8,7 +8,6 @@ class DetectionState:
         self._rubik_machine_state = rubik_machine_state
         self._transiton_handler = transition_handler
         self._next_state = next_state
-        self._transition_isa = transition_isa
         self._photo_location = photo_location
         self._detection_phases = DETECTION_PHASES.copy()
         self._detection_phases.append(transition_isa)
@@ -27,3 +26,6 @@ class DetectionState:
         self._current_phase_index += 1
         if self._current_phase_index == len(self._detection_phases):
             self._rubik_machine_state.set_current_state(self._next_state)
+    
+    def is_complete(self):
+        return self._current_phase_index >= len(self._detection_phases)
