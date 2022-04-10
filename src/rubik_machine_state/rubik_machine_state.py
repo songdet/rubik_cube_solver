@@ -1,5 +1,6 @@
+from .state import State
 
-class RubikMachineState:
+class RubikMachineState(State):
 
     def __init__(self, transition_handlers):
         self._transition_handlers = transition_handlers

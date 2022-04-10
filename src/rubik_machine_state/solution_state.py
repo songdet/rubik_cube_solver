@@ -1,4 +1,6 @@
-class SolutionState:
+from .state import State
+
+class SolutionState(State):
 
     def __init__(self, solution_isa, transition_handler):
         self._solution_isa = solution_isa

@@ -1,8 +1,9 @@
 from solver import Isa
+from .state import State
 
 DETECTION_PHASES = [Isa.ST, Isa.HH, "photo", Isa.HV, "photo"]
 
-class DetectionState:
+class DetectionState(State):
 
     def __init__(self, rubik_machine_state, transition_handler, next_state, transition_isa, photo_location):
         self._rubik_machine_state = rubik_machine_state
