@@ -18,9 +18,6 @@ class ParentState(State):
     def set_current_state(self, state):
         self.current_state = state
     
-    def set_solution(self, solution):
-        self.solution = solution
-
     def get_cube(self):
         return self.cube
 

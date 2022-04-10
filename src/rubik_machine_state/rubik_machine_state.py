@@ -1,15 +1,14 @@
+from rubik_machine_state.detection_state import DetectionState
+from rubik_machine_state.non_isa import NonIsa
+from solver.isa import Isa
 from .state import State
 from cube import Side
 from cube import Cube
 
-def construct_default_state():
-    pass
-
 class RubikMachineState(State):
 
-    def __init__(self, transition_handlers):
-        self._transition_handlers = transition_handlers
-        self._current_state = construct_default_state()
+    def __init__(self, transition_handler):
+        self._current_state = self._construct_default_state(transition_handler)
         self._sides = {}
         self._solution = []
     
@@ -25,9 +24,6 @@ class RubikMachineState(State):
     def set_current_state(self, state):
         self._current_state = state
     
-    def set_solution(self, solution):
-        self._solution = solution
-
     def get_cube(self):
         return Cube(
             front=self._sides[Side.FRONT],
@@ -38,3 +34,11 @@ class RubikMachineState(State):
             bottom=self._sides[Side.BOTTOM]
         )
 
+    def _construct_default_state(self, transition_handler):
+        detect_right = DetectionState(self, Side.RIGHT, transition_handler, None, NonIsa.SOLVE)
+        detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_right, [Isa.RT, Isa.RT])
+        detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, detect_left, Isa.RT)
+        detect_back = DetectionState(self, Side.BACK, transition_handler, detect_bottom, Isa.RV)
+        detect_top = DetectionState(self, Side.TOP, transition_handler, detect_back, Isa.RV)
+        detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_top, Isa.RV)
+        return detect_front

@@ -1,6 +1,7 @@
 from solver import Isa
 from .non_isa import NonIsa
 from .state import State
+from .solution_state import SolutionState
 
 DETECTION_PHASES = [Isa.ST, Isa.HH, NonIsa.PHOTO_1, Isa.HV, NonIsa.PHOTO_2]
 
@@ -12,7 +13,10 @@ class DetectionState(State):
         self._transition_handler = transition_handler
         self._next_state = next_state
         self._detection_phases = DETECTION_PHASES.copy()
-        self._detection_phases.append(transition_value)
+        if isinstance(transition_value, list):
+            self._detection_phases.extend(transition_value)
+        else:
+            self._detection_phases.append(transition_value)
         self._current_phase_index = 0
 
     def transition(self, _):
@@ -30,7 +34,7 @@ class DetectionState(State):
             elif current_phase == NonIsa.SOLVE:
                 cube = self._rubik_machine_state.get_cube()
                 solution = self._transition_handler.solve_transition(cube)
-                self._rubik_machine_state.set_solution(solution)
+                self._next_state = SolutionState(solution, self._transition_handler)
 
         # Set new state in parent if we are end of detection phase
         self._current_phase_index += 1
