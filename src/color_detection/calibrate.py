@@ -2,9 +2,8 @@ from PIL import Image
 from colorthief import ColorThief
 from tempfile import NamedTemporaryFile
 from statistics import median
-from color_detection.defaults import DEFAULT_IMAGE_BOUNDS
 
-def get_color_bound(img_file, img_bounds=DEFAULT_IMAGE_BOUNDS):
+def get_color_bound(img_file, img_bounds):
     dominant_colors = []
     img_file = Image.open(img_file)
     for bound in img_bounds:

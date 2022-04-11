@@ -2,16 +2,16 @@ from PIL import Image
 from colorthief import ColorThief
 from math import sqrt
 from tempfile import NamedTemporaryFile
-from color_detection.defaults import DEFAULT_IMAGE_BOUNDS, DEFAULT_COLOR_BOUNDS
+from color_detection.defaults import DEFAULT_COLOR_BOUNDS
 
-def detect(img_file, img_bounds=DEFAULT_IMAGE_BOUNDS, color_bounds=DEFAULT_COLOR_BOUNDS):
+def detect(img_file, img_bounds, color_bounds=DEFAULT_COLOR_BOUNDS):
     color_detector = ColorDetector(img_bounds, color_bounds)
     return color_detector.detect(img_file)
 
 
 class ColorDetector:
 
-    def __init__(self, img_bounds=DEFAULT_IMAGE_BOUNDS, color_bounds=DEFAULT_COLOR_BOUNDS):
+    def __init__(self, img_bounds, color_bounds=DEFAULT_COLOR_BOUNDS):
         self._img_bounds = img_bounds
         self._color_bounds = color_bounds
     

@@ -1,6 +1,14 @@
 from color_detection import detect
 from cube import Color
-import pytest
+
+COLOR_BOUNDS = {
+    Color.BLUE: (20, 105, 190),
+    Color.GREEN: (70, 175, 100),
+    Color.ORANGE: (220, 105, 90),
+    Color.RED: (120, 30, 30),
+    Color.WHITE: (175, 180, 200),
+    Color.YELLOW: (170, 200, 120)
+}
 
 def test_green_detect():
     bounds = [(1105, 1170, 1310, 1385),
@@ -12,26 +20,10 @@ def test_green_detect():
               (1105, 1715, 1310, 1920),
               (1375, 1715, 1585, 1920),
               (1645, 1715, 1855, 1920)]
-    result = detect("tests/color_detection/cube_green.jpg", bounds)
+    result = detect("tests/color_detection/cube_green.jpg", bounds, COLOR_BOUNDS)
     assert result == [Color.GREEN, Color.GREEN, Color.GREEN, 
                       Color.GREEN, Color.GREEN, Color.GREEN,
                       Color.GREEN, Color.GREEN, Color.GREEN]
-
-@pytest.mark.skip(reason="New bounds needed")
-def test_red_detect():
-    bounds = [(1085, 940, 1300, 1165),
-              (1370, 940, 1580, 1165),
-              (1645, 940, 1860, 1165),
-              (1085, 1230, 1300, 1445),
-              (1370, 1230, 1580, 1445),
-              (1645, 1230, 1860, 1445),
-              (1085, 1505, 1300, 1715),
-              (1370, 1505, 1580, 1715),
-              (1645, 1505, 1860, 1715)]
-    result = detect("tests/color_detection/cube_red.jpg", bounds)
-    assert result == [Color.RED, Color.RED, Color.RED, 
-                      Color.RED, Color.RED, Color.RED,
-                      Color.RED, Color.RED, Color.RED]
 
 def test_orange_detect():
     bounds = [(1090, 1070, 1295, 1290),
@@ -43,7 +35,7 @@ def test_orange_detect():
               (1090, 1630, 1295, 1835),
               (1350, 1630, 1565, 1835),
               (1630, 1630, 1840, 1835)]
-    result = detect("tests/color_detection/cube_orange.jpg", bounds)
+    result = detect("tests/color_detection/cube_orange.jpg", bounds, COLOR_BOUNDS)
     assert result == [Color.ORANGE, Color.ORANGE, Color.ORANGE, 
                       Color.ORANGE, Color.ORANGE, Color.ORANGE,
                       Color.ORANGE, Color.ORANGE, Color.ORANGE]
@@ -58,7 +50,7 @@ def test_blue_detect():
               (1105, 1585, 1310, 1785),
               (1375, 1585, 1575, 1785),
               (1640, 1585, 1840, 1785)]
-    result = detect("tests/color_detection/cube_blue.jpg", bounds)
+    result = detect("tests/color_detection/cube_blue.jpg", bounds, COLOR_BOUNDS)
     assert result == [Color.BLUE, Color.BLUE, Color.BLUE, 
                       Color.BLUE, Color.BLUE, Color.BLUE,
                       Color.BLUE, Color.BLUE, Color.BLUE]
@@ -73,23 +65,7 @@ def test_white_detect():
               (1080, 1450, 1295, 1660),
               (1355, 1450, 1570, 1660),
               (1630, 1450, 1845, 1660)]
-    result = detect("tests/color_detection/cube_white.jpg", bounds)
+    result = detect("tests/color_detection/cube_white.jpg", bounds, COLOR_BOUNDS)
     assert result == [Color.WHITE, Color.WHITE, Color.WHITE, 
                       Color.WHITE, Color.WHITE, Color.WHITE,
                       Color.WHITE, Color.WHITE, Color.WHITE]
-
-@pytest.mark.skip(reason="New bounds needed")
-def test_yellow_detect():
-    bounds = [(1050, 910, 1260, 1135),
-              (1320, 910, 1535, 1135),
-              (1600, 910, 1815, 1135),
-              (1050, 1200, 1260, 1415),
-              (1320, 1200, 1535, 1415),
-              (1600, 1200, 1815, 1415),
-              (1050, 1480, 1260, 1690),
-              (1320, 1480, 1535, 1690),
-              (1600, 1480, 1815, 1690)]
-    result = detect("tests/color_detection/cube_yellow.jpg", bounds)
-    assert result == [Color.YELLOW, Color.YELLOW, Color.YELLOW, 
-                      Color.YELLOW, Color.YELLOW, Color.YELLOW,
-                      Color.YELLOW, Color.YELLOW, Color.YELLOW]
