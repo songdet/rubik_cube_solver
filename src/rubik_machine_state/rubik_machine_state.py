@@ -8,12 +8,23 @@ from cube import Cube
 class RubikMachineState(State):
 
     def __init__(self, transition_handler):
+        self._transition_handler = transition_handler
         self._current_state = self._construct_default_state(transition_handler)
         self._sides = {}
         self._solution = []
     
     def transition(self, data):
-        self._current_state.transition(data)
+        if data == b'O\n':
+            # Do transition if previous state was ok
+            self._current_state.transition(data)
+        elif data == b'R\n':
+            # Reset state to default
+            self._current_state = self._construct_default_state(self._transition_handler)
+            self._sides = {}
+            self._solution = []
+        elif data == b'S\n':
+            # Don't do anything since we were told to stop
+            pass
     
     def is_complete(self):
         return self._current_state.is_complete()
@@ -35,10 +46,10 @@ class RubikMachineState(State):
         )
 
     def _construct_default_state(self, transition_handler):
-        detect_right = DetectionState(self, Side.RIGHT, transition_handler, None, NonIsa.SOLVE)
-        detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_right, [Isa.RT, Isa.RT])
-        detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, detect_left, Isa.RT)
-        detect_back = DetectionState(self, Side.BACK, transition_handler, detect_bottom, Isa.RV)
-        detect_top = DetectionState(self, Side.TOP, transition_handler, detect_back, Isa.RV)
-        detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_top, Isa.RV)
+        detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, None, NonIsa.SOLVE)
+        detect_top = DetectionState(self, Side.TOP, transition_handler, detect_bottom, [Isa.RV, Isa.RV])
+        detect_right = DetectionState(self, Side.RIGHT, transition_handler, detect_top, [Isa.RT, Isa.RV])
+        detect_back = DetectionState(self, Side.BACK, transition_handler, detect_right, Isa.RT)
+        detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_back, Isa.RT)
+        detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_left, Isa.RT)
         return detect_front

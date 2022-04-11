@@ -1,9 +1,10 @@
 from rubik_machine_state.detection_state import DetectionState
 from rubik_machine_state.non_isa import NonIsa
+from rubik_machine_state.solution_state import SolutionState
 from solver import Isa
 from transition import TransitionHandler
 from .fake_transition_handlers import *
-from cube import Color, Side, Cube
+from cube import Color, Side
 
 
 def test_detection_state():
@@ -63,5 +64,5 @@ def test_detection_state():
     assert parent_state.sides[Side.TOP] == [Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.ORANGE, Color.RED, Color.WHITE, Color.WHITE, Color.WHITE]
 
     detection_state_1.transition(b'')
-    assert parent_state.solution == [Isa.HH, Isa.HV, Isa.RBC]
+    assert detection_state_1._next_state._solution_isa == [Isa.HH, Isa.HV, Isa.RBC]
     assert detection_state_1.is_complete() == True
