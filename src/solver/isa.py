@@ -7,7 +7,7 @@ class Isa(Enum):
     HV = "HV", 3, "Hold Vertical", "The rubik cube is held by top and bottom gripper, while the left and right gripeprs are retracted." 
     MV = "MV", 4, "Move Vertical", "Starting in ST position, retract left gripper, rotate it cw, extend it, then retract top and bottom gripper, then rotate left gripper ccw and right gripper cw." 
     MH = "MH", 5, "Move Horizontal", "Starting in ST position, retract top gripper, rotate it cw, extend it, then retract left and right gripper, then rotate top gripper ccw and right gripper cw."
-    MHCCW = "MHCCW", 6, "Move Horizontal Counterclockwise", "Starting in ST position, retract top gripper, rotate it cw, extend it, then retract left and right gripper, then rotate top gripper ccw and right gripper cw."
+    MHCCW = "MHCCW", 6, "Move Horizontal Counterclockwise", "Starting in ST position, retract top gripper, rotate it ccw, extend it, then retract left and right gripper, then rotate top gripper cw and right gripper ccw."
     RLC = "RLC", 7, "Rotate Left Clockwise", "Starting in ST position, rotate left gripper clockwise, then reset to ST position."
     RLCCW = "RLCCW", 8, "Rotate Left Counterclockwise", "Starting in ST position, rotate left gripper counterclockwise, then reset to ST position."
     RRC = "RRC", 9, "Rotate Right Clockwise", "Starting in ST position, rotate right gripper clockwise, then reset to ST position."
