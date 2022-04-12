@@ -32,4 +32,6 @@ def test_solution_state():
     solution_state.transition(b'')
     assert communication.written_data[3] == Isa.RLC.get_isa_number().to_bytes(1, "little")
 
+    solution_state.transition(b'')
+    assert communication.written_data[4] == Isa.ST.get_isa_number().to_bytes(1, "little")
     assert solution_state.is_complete() == True

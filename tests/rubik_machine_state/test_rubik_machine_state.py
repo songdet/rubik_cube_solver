@@ -60,6 +60,9 @@ def test_rubik_machine_state():
 
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.RBC.get_isa_number().to_bytes(1, "little")
+
+    machine_state.transition(b'O\n')
+    assert communication.written_data[-1] == Isa.ST.get_isa_number().to_bytes(1, "little")
     assert machine_state.is_complete() == True
 
 def _test_transition(machine_state, communication, camera, side, photo_count):

@@ -1,9 +1,11 @@
+from solver.isa import Isa
 from .state import State
 
 class SolutionState(State):
 
     def __init__(self, solution_isa, transition_handler):
-        self._solution_isa = solution_isa
+        self._solution_isa = solution_isa.copy()
+        self._solution_isa.append(Isa.ST)
         self._transition_handler = transition_handler
         self._current_phase_index = 0
     
