@@ -47,9 +47,9 @@ class RubikMachineState(State):
 
     def _construct_default_state(self, transition_handler):
         detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, None, NonIsa.SOLVE)
-        detect_top = DetectionState(self, Side.TOP, transition_handler, detect_bottom, [Isa.RV, Isa.RV])
-        detect_right = DetectionState(self, Side.RIGHT, transition_handler, detect_top, [Isa.RT, Isa.RV])
-        detect_back = DetectionState(self, Side.BACK, transition_handler, detect_right, Isa.RT)
-        detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_back, Isa.RT)
-        detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_left, Isa.RT)
+        detect_top = DetectionState(self, Side.TOP, transition_handler, detect_bottom, [Isa.MV, Isa.MV])
+        detect_right = DetectionState(self, Side.RIGHT, transition_handler, detect_top, [Isa.MH, Isa.MV])
+        detect_back = DetectionState(self, Side.BACK, transition_handler, detect_right, Isa.MH)
+        detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_back, Isa.MH)
+        detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_left, Isa.MH)
         return detect_front

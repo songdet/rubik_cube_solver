@@ -1,23 +1,21 @@
 from enum import Enum
 
 class Isa(Enum):
-    ST = "ST", 0, "Start", "Extend all 4 grippers so that they grip the rubik cube."
-    HH = "HH", 1, "Hold Horizontal", "The rubik cube is held by left and right gripper, while the top and bottom grippers are retracted."
-    HV = "HV", 2, "Hold Vertical", "The rubik cube is held by top and bottom gripper, while the left and right gripeprs are retracted." 
-    RV = "RV", 3, "Rotate Vertical", "Starting in ST position, retract left gripper, rotate it cw, extend it, then retract top and bottom gripper, then rotate left gripper ccw and right gripper cw."
-    RT = "RT", 4, "Rotate Horizontal", "Starting in ST position, retract top gripper, rotate it cw, extend it, then retract left and right gripper, then rotate top gripper ccw and right gripper cw."
-    MVVCW = "MVVCW", 5, "Move Vertical Clockwise", "Starting in HH position, rotate left gripper counterclockwise and right gripper clockwise, then reset to HH position."
-    MVVCCW = "MVVCCW", 6, "Move Vertical Counterclockwise", "Starting in HH position, rotate left gripper clockwise and right gripper counterclockwise, then reset to HH position."
-    MVHCW = "MVHCW", 7, "Move Horizontal Clockwise", "Starting in HV position, rotate top gripper clockwise and bottom gripper counterclockwise, then reset to HV position."
-    MVHCCW = "MVHCCW", 8, "Move Horizontal Counterclockwise", "Starting in HV position, rotate top gripper counterclockwise and bottom gripper clockwise, then reset to HV position."
-    RLC = "RLC", 9, "Rotate Left Clockwise", "Starting in ST position, rotate left gripper clockwise, then reset to ST position."
-    RLCCW = "RLCCW", 10, "Rotate Left Counterclockwise", "Starting in ST position, rotate left gripper counterclockwise, then reset to ST position."
-    RRC = "RRC", 11, "Rotate Right Clockwise", "Starting in ST position, rotate right gripper clockwise, then reset to ST position."
-    RRCCW = "RRCCW", 12, "Rotate Right Counterclockwise", "Starting in ST position, rotate right gripper counterclockwise, then reset to ST position."
-    RBC = "RBC", 13, "Rotate Bottom Clockwise", "Starting in ST position, rotate bottom gripper clockwise, then reset to ST position."
-    RBCCW = "RBCCW", 14, "Rotate Bottom Counterclockwise", "Starting in ST position, rotate bottom gripper counterclockwise, then reset to ST position."
-    RTC = "RTC", 15, "Rotate Top Clockwise", "Starting in ST position, rotate top gripper clockwise, then reset to ST position."
-    RTCCW = "RTCCW", 16, "Rotate Top Counterclockwise", "Starting in ST position, rotate top gripper counterclockwise, then reset to ST position."
+    ST = "ST", 0, "Start", "Retract all 4 arms to start position."
+    GR = "GR", 1, "Grip", "Extend all 4 arms so that they grip the rubik cube."
+    HH = "HH", 2, "Hold Horizontal", "The rubik cube is held by left and right gripper, while the top and bottom grippers are retracted."
+    HV = "HV", 3, "Hold Vertical", "The rubik cube is held by top and bottom gripper, while the left and right gripeprs are retracted." 
+    MV = "MV", 4, "Move Vertical", "Starting in ST position, retract left gripper, rotate it cw, extend it, then retract top and bottom gripper, then rotate left gripper ccw and right gripper cw." 
+    MH = "MH", 5, "Move Horizontal", "Starting in ST position, retract top gripper, rotate it cw, extend it, then retract left and right gripper, then rotate top gripper ccw and right gripper cw."
+    MHCCW = "MHCCW", 6, "Move Horizontal Counterclockwise", "Starting in ST position, retract top gripper, rotate it cw, extend it, then retract left and right gripper, then rotate top gripper ccw and right gripper cw."
+    RLC = "RLC", 7, "Rotate Left Clockwise", "Starting in ST position, rotate left gripper clockwise, then reset to ST position."
+    RLCCW = "RLCCW", 8, "Rotate Left Counterclockwise", "Starting in ST position, rotate left gripper counterclockwise, then reset to ST position."
+    RRC = "RRC", 9, "Rotate Right Clockwise", "Starting in ST position, rotate right gripper clockwise, then reset to ST position."
+    RRCCW = "RRCCW", 10, "Rotate Right Counterclockwise", "Starting in ST position, rotate right gripper counterclockwise, then reset to ST position."
+    RBC = "RBC", 11, "Rotate Bottom Clockwise", "Starting in ST position, rotate bottom gripper clockwise, then reset to ST position."
+    RBCCW = "RBCCW", 12, "Rotate Bottom Counterclockwise", "Starting in ST position, rotate bottom gripper counterclockwise, then reset to ST position."
+    RTC = "RTC", 13, "Rotate Top Clockwise", "Starting in ST position, rotate top gripper clockwise, then reset to ST position."
+    RTCCW = "RTCCW", 14, "Rotate Top Counterclockwise", "Starting in ST position, rotate top gripper counterclockwise, then reset to ST position."
 
     def __new__(cls, *args, **kwds):
         obj = object.__new__(cls)

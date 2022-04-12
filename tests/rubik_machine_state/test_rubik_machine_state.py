@@ -19,32 +19,32 @@ def test_rubik_machine_state():
     assert machine_state.is_complete() == False
     _test_transition(machine_state, communication, camera, Side.FRONT, 1) 
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.RT.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.MH.get_isa_number().to_bytes(1, "little")
 
     # Left transition
     _test_transition(machine_state, communication, camera, Side.LEFT, 3) 
     machine_state.transition(b'S\n') # Test that stopping and starting works correctly
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.RT.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.MH.get_isa_number().to_bytes(1, "little")
 
     # Back transition
     _test_transition(machine_state, communication, camera, Side.BACK, 5) 
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.RT.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.MH.get_isa_number().to_bytes(1, "little")
 
     # Right transition
     _test_transition(machine_state, communication, camera, Side.RIGHT, 7) 
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.RT.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.MH.get_isa_number().to_bytes(1, "little")
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.RV.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.MV.get_isa_number().to_bytes(1, "little")
 
     # Top transition
     _test_transition(machine_state, communication, camera, Side.TOP, 9) 
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.RV.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.MV.get_isa_number().to_bytes(1, "little")
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.RV.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.MV.get_isa_number().to_bytes(1, "little")
 
     # Bottom transition
     _test_transition(machine_state, communication, camera, Side.BOTTOM, 11) 
@@ -65,7 +65,7 @@ def test_rubik_machine_state():
 def _test_transition(machine_state, communication, camera, side, photo_count):
 
     machine_state.transition(b'O\n')
-    assert communication.written_data[-1] == Isa.ST.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
 
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.HH.get_isa_number().to_bytes(1, "little")

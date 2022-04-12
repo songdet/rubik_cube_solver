@@ -3,7 +3,7 @@ from .non_isa import NonIsa
 from .state import State
 from .solution_state import SolutionState
 
-DETECTION_PHASES = [Isa.ST, Isa.HH, NonIsa.PHOTO_1, Isa.HV, NonIsa.PHOTO_2]
+DETECTION_PHASES = [Isa.GR, Isa.HH, NonIsa.PHOTO_1, Isa.HV, NonIsa.PHOTO_2]
 
 class DetectionState(State):
 
