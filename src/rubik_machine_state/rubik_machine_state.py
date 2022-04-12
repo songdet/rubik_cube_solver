@@ -22,9 +22,10 @@ class RubikMachineState(State):
             self._current_state = self._construct_default_state(self._transition_handler)
             self._sides = {}
             self._solution = []
+            self._transition_handler.isa_transition(Isa.ST)
         elif data == b'S\n':
-            # Don't do anything since we were told to stop
-            pass
+            # Tell machine to go back to start state
+            self._transition_handler.isa_transition(Isa.ST)
     
     def is_complete(self):
         return self._current_state.is_complete()

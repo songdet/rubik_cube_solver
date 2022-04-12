@@ -24,6 +24,7 @@ def test_rubik_machine_state():
     # Left transition
     _test_transition(machine_state, communication, camera, Side.LEFT, 3) 
     machine_state.transition(b'S\n') # Test that stopping and starting works correctly
+    assert communication.written_data[-1] == Isa.ST.get_isa_number().to_bytes(1, "little")
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.MH.get_isa_number().to_bytes(1, "little")
 
