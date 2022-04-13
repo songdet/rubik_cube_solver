@@ -78,9 +78,14 @@ def _test_transition(machine_state, communication, camera, side, photo_count):
     assert len(camera.taken_photos) == photo_count
 
     machine_state.transition(b'O\n')
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
+
+    machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.HV.get_isa_number().to_bytes(1, "little")
 
     machine_state.transition(b'O\n')
     assert len(camera.taken_photos) == (photo_count + 1)
     assert machine_state._sides[side] == [Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.ORANGE, Color.RED, Color.WHITE, Color.WHITE, Color.WHITE]
     
+    machine_state.transition(b'O\n')
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")

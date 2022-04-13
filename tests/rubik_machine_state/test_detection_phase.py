@@ -24,23 +24,29 @@ def test_detection_state():
     assert detection_state_2.is_complete() == False
 
     detection_state_2.transition(b'')
-    assert communication.written_data[0] == Isa.GR.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
 
     detection_state_2.transition(b'')
-    assert communication.written_data[1] == Isa.HH.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.HH.get_isa_number().to_bytes(1, "little")
 
     detection_state_2.transition(b'')
     assert len(camera.taken_photos) == 1
 
     detection_state_2.transition(b'')
-    assert communication.written_data[2] == Isa.HV.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
+
+    detection_state_2.transition(b'')
+    assert communication.written_data[-1] == Isa.HV.get_isa_number().to_bytes(1, "little")
 
     detection_state_2.transition(b'')
     assert len(camera.taken_photos) == 2
     assert parent_state.sides[Side.FRONT] == [Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.ORANGE, Color.RED, Color.WHITE, Color.WHITE, Color.WHITE]
 
     detection_state_2.transition(b'')
-    assert communication.written_data[3] == Isa.MV.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
+
+    detection_state_2.transition(b'')
+    assert communication.written_data[-1] == Isa.MV.get_isa_number().to_bytes(1, "little")
     assert parent_state.current_state == detection_state_1
     assert detection_state_2.is_complete() == True
 
@@ -48,20 +54,26 @@ def test_detection_state():
     assert detection_state_1.is_complete() == False
 
     detection_state_1.transition(b'')
-    assert communication.written_data[4] == Isa.GR.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
 
     detection_state_1.transition(b'')
-    assert communication.written_data[5] == Isa.HH.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.HH.get_isa_number().to_bytes(1, "little")
 
     detection_state_1.transition(b'')
     assert len(camera.taken_photos) == 3
 
     detection_state_1.transition(b'')
-    assert communication.written_data[6] == Isa.HV.get_isa_number().to_bytes(1, "little")
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
+
+    detection_state_1.transition(b'')
+    assert communication.written_data[-1] == Isa.HV.get_isa_number().to_bytes(1, "little")
 
     detection_state_1.transition(b'')
     assert len(camera.taken_photos) == 4
     assert parent_state.sides[Side.TOP] == [Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.ORANGE, Color.RED, Color.WHITE, Color.WHITE, Color.WHITE]
+
+    detection_state_1.transition(b'')
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
 
     detection_state_1.transition(b'')
     assert detection_state_1._next_state._solution_isa == [Isa.HH, Isa.HV, Isa.RBC, Isa.ST]
