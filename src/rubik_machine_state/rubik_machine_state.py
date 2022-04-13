@@ -26,6 +26,7 @@ class RubikMachineState(State):
         elif data == b'R\n':
             # Reset state to default
             self._current_state = self._construct_default_state(self._transition_handler)
+            self._is_stopped = False
             self._sides = {}
             self._solution = []
             self._transition_handler.isa_transition(Isa.ST)
