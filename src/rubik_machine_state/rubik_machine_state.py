@@ -10,13 +10,19 @@ class RubikMachineState(State):
     def __init__(self, transition_handler):
         self._transition_handler = transition_handler
         self._current_state = self._construct_default_state(transition_handler)
+        self._is_stopped = False
         self._sides = {}
         self._solution = []
     
     def transition(self, data):
         if data == b'O\n':
-            # Do transition if previous state was ok
-            self._current_state.transition(data)
+            if self._is_stopped:
+                # If we were previously stopped, put the machine back in grip state first
+                self._is_stopped = False
+                self._transition_handler.isa_transition(Isa.GR)
+            else:
+                # Do transition if previous state was ok
+                self._current_state.transition(data)
         elif data == b'R\n':
             # Reset state to default
             self._current_state = self._construct_default_state(self._transition_handler)
@@ -25,6 +31,7 @@ class RubikMachineState(State):
             self._transition_handler.isa_transition(Isa.ST)
         elif data == b'S\n':
             # Tell machine to go back to start state
+            self._is_stopped = True
             self._transition_handler.isa_transition(Isa.ST)
     
     def is_complete(self):
