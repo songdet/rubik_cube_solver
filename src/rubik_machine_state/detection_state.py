@@ -22,12 +22,23 @@ class DetectionState(State):
         detected_colors = self._transition_handler.camera_transition()
         self._rubik_machine_state.set_side(self._side, detected_colors)
 
-        # If this is the last detection state, we already have everything to solve cube, so solve it
+        # Report the detected colors 
+        self._transition_handler.print("The following colors are detected: ")
+        self._transition_handler.print("[%s %s %s]" % (detected_colors[0].get_color_code(), detected_colors[1].get_color_code(), detected_colors[2].get_color_code()))
+        self._transition_handler.print("[%s %s %s]" % (detected_colors[3].get_color_code(), detected_colors[4].get_color_code(), detected_colors[5].get_color_code()))
+        self._transition_handler.print("[%s %s %s]" % (detected_colors[6].get_color_code(), detected_colors[7].get_color_code(), detected_colors[8].get_color_code()))
+
         if (self._is_last_state):
+            # If this is the last detection state, we already have everything to solve cube, so solve it
             cube = self._rubik_machine_state.get_cube()
             solution = self._transition_handler.solve_transition(cube)
             solution_state = SolutionState(solution, self._transition_handler)
             self._next_state = SolutionStartState(self._rubik_machine_state, self._transition_handler, solution_state)
+        else:
+            # Otherwise, prompt for the next face to be shown towards the camera
+            self._transition_handler.print("")
+            self._transition_handler.print("====================================================================================")
+            self._transition_handler.print("Please rotate the cube and put the {} side facing the camera".format(self._next_state._side.get_color()))
 
         # Set rubik machine state to next avaiable state and mark complete
         self._rubik_machine_state.set_current_state(self._next_state)

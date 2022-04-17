@@ -2,12 +2,26 @@ from enum import Enum, auto
 from .color import Color, COLOR_CODES, COLOR_CODE_TO_COLOR, COLOR_TO_CUBE_CODE
 
 class Side(Enum):
-    FRONT = auto()
-    BACK = auto()
-    LEFT = auto()
-    RIGHT = auto()
-    TOP = auto()
-    BOTTOM = auto()
+    FRONT = "FRONT", "green"
+    BACK = "BACK", "blue"
+    LEFT = "LEFT", "orange"
+    RIGHT = "RIGHT", "red" 
+    TOP = "TOP", "white"
+    BOTTOM = "BOTTOM", "yellow"
+
+    def __new__(cls, *args, **kwds):
+        obj = object.__new__(cls)
+        obj._value_ = args[0]
+        return obj
+    
+    def __init__(self, _: str, color: str):
+        self._color = color
+
+    def __str__(self) -> str:
+        return self.value
+
+    def get_color(self):
+        return self._color
 
 class Cube:
     def __init__(self, front, back, left, right, top, bottom):

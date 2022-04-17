@@ -20,6 +20,10 @@ class SolutionStartState(State):
         self._transition_handler.isa_transition(Isa.GR)
         self._rubik_machine_state.set_current_state(self._next_state)
 
+        # Report the start of solution phase
+        self._transition_handler.print("====================================================================================")
+        self._transition_handler.print("                                 SOLUTION PHASE                                    ")
+
         # Make sure we don't transition again
         self._is_complete = True
     
