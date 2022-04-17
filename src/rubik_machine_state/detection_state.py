@@ -1,5 +1,6 @@
 from .state import State
 from .solution_state import SolutionState
+from .solution_start_state import SolutionStartState
 
 class DetectionState(State):
 
@@ -25,7 +26,8 @@ class DetectionState(State):
         if (self._is_last_state):
             cube = self._rubik_machine_state.get_cube()
             solution = self._transition_handler.solve_transition(cube)
-            self._next_state = SolutionState(solution, self._transition_handler)
+            solution_state = SolutionState(solution, self._transition_handler)
+            self._next_state = SolutionStartState(self._rubik_machine_state, self._transition_handler, solution_state)
 
         # Set rubik machine state to next avaiable state and mark complete
         self._rubik_machine_state.set_current_state(self._next_state)

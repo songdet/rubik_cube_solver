@@ -1,4 +1,6 @@
+from numpy import isin
 from rubik_machine_state import DetectionState, DetectionStartState
+from rubik_machine_state import SolutionState, SolutionStartState
 from solver.isa import Isa
 from .state import State
 from cube import Side
@@ -9,29 +11,29 @@ class RubikMachineState(State):
     def __init__(self, transition_handler):
         self._transition_handler = transition_handler
         self._current_state = self._construct_default_state(transition_handler)
-        self._is_stopped = False
         self._sides = {}
         self._solution = []
     
     def transition(self, data):
         if data == b'O\n':
-            if self._is_stopped:
-                # If we were previously stopped, put the machine back in grip state first
-                self._is_stopped = False
-                self._transition_handler.isa_transition(Isa.GR)
-            else:
-                # Do transition if previous state was ok
-                self._current_state.transition(data)
+            # Do transition if previous state was ok
+            self._current_state.transition(data)
         elif data == b'R\n':
             # Reset state to default
             self._current_state = self._construct_default_state(self._transition_handler)
-            self._is_stopped = False
             self._sides = {}
             self._solution = []
             self._transition_handler.isa_transition(Isa.ST)
         elif data == b'S\n':
+            if (isinstance(self._current_state, DetectionState)):
+                # If we are in detection state, put DetectStartState as current state before stopping
+                start_state = DetectionStartState(self, self._transition_handler, self._current_state)
+                self._current_state = start_state
+            if (isinstance(self._current_state, SolutionState)):
+                # If we are in solution state, put SolutionStartState as current state before continuing
+                start_state = SolutionStartState(self, self._transition_handler, self._current_state)
+                self._current_state = start_state
             # Tell machine to go back to start state
-            self._is_stopped = True
             self._transition_handler.isa_transition(Isa.ST)
     
     def is_complete(self):

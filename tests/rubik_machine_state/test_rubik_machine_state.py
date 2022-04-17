@@ -2,7 +2,7 @@ from .fake_transition_handlers import *
 from cube import Color, Side
 from solver import Isa
 from transition import TransitionHandler
-from rubik_machine_state import RubikMachineState, SolutionState
+from rubik_machine_state import RubikMachineState, SolutionStartState
 
 def test_rubik_machine_state():
 
@@ -42,9 +42,12 @@ def test_rubik_machine_state():
     # Bottom transition
     assert machine_state.is_complete() == False
     _test_transition(machine_state, camera, Side.BOTTOM, 6) 
-    assert isinstance(machine_state._current_state, SolutionState)
+    assert isinstance(machine_state._current_state, SolutionStartState)
 
     # Test solution state transition
+    machine_state.transition(b'O\n')
+    assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
+
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.HH.get_isa_number().to_bytes(1, "little")
 
