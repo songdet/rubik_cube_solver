@@ -14,6 +14,11 @@ def test_rubik_machine_state():
     transition_handler = TransitionHandler(communication, camera, photo_detector, solver)
     machine_state = RubikMachineState(transition_handler) 
 
+    # Start transition
+    assert machine_state.is_complete() == False
+    machine_state.transition(b'O\n')
+    assert communication.written_data[-1] == Isa.DT.get_isa_number().to_bytes(1, "little")
+
     # Front transition
     assert machine_state.is_complete() == False
     _test_transition(machine_state, camera, Side.FRONT, 1) 

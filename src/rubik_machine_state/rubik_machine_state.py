@@ -1,4 +1,4 @@
-from rubik_machine_state.detection_state import DetectionState
+from rubik_machine_state import DetectionState, DetectionStartState
 from solver.isa import Isa
 from .state import State
 from cube import Side
@@ -60,4 +60,5 @@ class RubikMachineState(State):
         detect_back = DetectionState(self, Side.BACK, transition_handler, detect_right, False)
         detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_back, False)
         detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_left, False)
-        return detect_front
+        detect_start = DetectionStartState(self, transition_handler, detect_front)
+        return detect_start
