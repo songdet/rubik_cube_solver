@@ -1,7 +1,7 @@
 from PIL import Image
 from colorthief import ColorThief
 from tempfile import NamedTemporaryFile
-from statistics import median
+from statistics import median_low
 
 def get_color_bound(img_file, img_bounds):
     dominant_colors = []
@@ -19,5 +19,5 @@ def _get_median_values(dominant_colors):
     r_val = [red for (red,_,_) in dominant_colors]
     g_val = [green for (_,green,_) in dominant_colors]
     b_val = [blue for (_,_,blue) in dominant_colors]
-    median_values = (median(r_val), median(g_val), median(b_val))
+    median_values = (median_low(r_val), median_low(g_val), median_low(b_val))
     return median_values
