@@ -8,7 +8,7 @@ from rubik_machine_state import RubikMachineState
 
 # Set up transition handler that will be used by finite state machine to handle user input
 communication = SerialCommunication('/dev/ttyUSB0', 9600)
-camera = Camera("192.168.0.1", "80")
+camera = Camera("192.168.4.1", "80")
 first_photo_detector = ColorDetector(DEFAULT_FIRST_IMAGE_BOUND, DEFAULT_COLOR_BOUNDS)
 second_photo_detector = ColorDetector(DEFAULT_SECOND_IMAGE_BOUND, DEFAULT_COLOR_BOUNDS)
 solver = Solver()
