@@ -27,10 +27,10 @@ DEFAULT_CALIBRATION_BOUND = [
 ]
 
 DEFAULT_COLOR_BOUNDS = {
-    Color.BLUE: (20, 105, 190),
-    Color.GREEN: (70, 175, 100),
-    Color.ORANGE: (220, 105, 90),
-    Color.RED: (120, 30, 30),
-    Color.WHITE: (175, 180, 200),
-    Color.YELLOW: (170, 200, 120)
+    Color.GREEN: (74, 171, 103),
+    Color.ORANGE: (209, 115, 99),
+    Color.RED: (124, 35, 31),
+    Color.BLUE: (21, 107, 181),
+    Color.WHITE: (169, 179, 189),
+    Color.YELLOW: (155, 181, 122)
 }
