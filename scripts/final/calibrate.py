@@ -1,4 +1,4 @@
-from color_detection.defaults import DEFAULT_CALIBRATION_BOUND
+from color_detection.defaults import DEFAULT_FIRST_IMAGE_BOUND
 from color_detection.calibrate import get_color_bound
 from pathlib import Path
 from camera import Camera
@@ -10,7 +10,7 @@ TMP_IMAGE_FILE = "/tmp/img_file.jpg"
 
 def get_and_print_img_bound(camera, color):
     camera.take_photo(TMP_IMAGE_FILE)
-    (boxed_color, color_bound) = get_color_bound(TMP_IMAGE_FILE, DEFAULT_CALIBRATION_BOUND)
+    (boxed_color, color_bound) = get_color_bound(TMP_IMAGE_FILE, DEFAULT_FIRST_IMAGE_BOUND)
     print("Boxed values: %s" % str(boxed_color))
     print("%s bound: %s" % (str(color).capitalize(), str(color_bound)))
     return color_bound
