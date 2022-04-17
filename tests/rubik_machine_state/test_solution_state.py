@@ -10,10 +10,9 @@ def test_solution_state():
     # Set up detection fake objects
     communication = FakeCommunication()
     camera = FakeCamera()
-    first_photo_detector = FakeColorDetector([Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE])
-    second_photo_detector = FakeColorDetector([Color.ORANGE, Color.RED])
+    photo_detector = FakeColorDetector([Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE, Color.ORANGE, Color.RED])
     solver = FakeSolver([Isa.HH, Isa.HV, Isa.RBC])
-    transition_handler = TransitionHandler(communication, camera, first_photo_detector, second_photo_detector, solver)
+    transition_handler = TransitionHandler(communication, camera, photo_detector, solver)
     solution_isa = [Isa.MHCCW, Isa.RRC, Isa.RBC, Isa.RLC]
     solution_state = SolutionState(solution_isa, transition_handler)    
 

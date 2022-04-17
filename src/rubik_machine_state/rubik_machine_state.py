@@ -1,5 +1,4 @@
 from rubik_machine_state.detection_state import DetectionState
-from rubik_machine_state.non_isa import NonIsa
 from solver.isa import Isa
 from .state import State
 from cube import Side
@@ -55,10 +54,10 @@ class RubikMachineState(State):
         )
 
     def _construct_default_state(self, transition_handler):
-        detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, None, NonIsa.SOLVE)
-        detect_top = DetectionState(self, Side.TOP, transition_handler, detect_bottom, [Isa.MV, Isa.MV])
-        detect_right = DetectionState(self, Side.RIGHT, transition_handler, detect_top, [Isa.MH, Isa.MV])
-        detect_back = DetectionState(self, Side.BACK, transition_handler, detect_right, Isa.MH)
-        detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_back, Isa.MH)
-        detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_left, Isa.MH)
+        detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, None, True)
+        detect_top = DetectionState(self, Side.TOP, transition_handler, detect_bottom, False)
+        detect_right = DetectionState(self, Side.RIGHT, transition_handler, detect_top, False)
+        detect_back = DetectionState(self, Side.BACK, transition_handler, detect_right, False)
+        detect_left = DetectionState(self, Side.LEFT, transition_handler, detect_back, False)
+        detect_front = DetectionState(self, Side.FRONT, transition_handler, detect_left, False)
         return detect_front

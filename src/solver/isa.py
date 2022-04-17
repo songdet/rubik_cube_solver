@@ -16,6 +16,7 @@ class Isa(Enum):
     RBCCW = "RBCCW", 12, "Rotate Bottom Counterclockwise", "Starting in GR position, rotate bottom gripper counterclockwise, then reset to GR position."
     RTC = "RTC", 13, "Rotate Top Clockwise", "Starting in GR position, rotate top gripper clockwise, then reset to GR position."
     RTCCW = "RTCCW", 14, "Rotate Top Counterclockwise", "Starting in GR position, rotate top gripper counterclockwise, then reset to GR position."
+    DT = "DT", 15, "Detect", "Starting in ST position, rotate bottom gripper clockwise and extend it"
 
     def __new__(cls, *args, **kwds):
         obj = object.__new__(cls)

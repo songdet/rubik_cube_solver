@@ -45,10 +45,9 @@ class FakeSolver:
 # Set up transition handler that will be used by finite state machine to handle user input
 communication = UserInputCommunication()
 camera = FakeCamera()
-first_photo_detector = FakeColorDetector([Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE])
-second_photo_detector = FakeColorDetector([Color.ORANGE, Color.RED])
+photo_detector = FakeColorDetector([Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE, Color.BLUE, Color.GREEN])
 solver = FakeSolver([Isa.HH, Isa.HV, Isa.RBC])
-transition_handler = TransitionHandler(communication, camera, first_photo_detector, second_photo_detector, solver)
+transition_handler = TransitionHandler(communication, camera, photo_detector, solver)
 
 # Set up finite state machine that will keep track of machine state
 machine_state = RubikMachineState(transition_handler)
