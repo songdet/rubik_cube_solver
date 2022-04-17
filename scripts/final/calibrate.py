@@ -49,13 +49,21 @@ if __name__ == "__main__":
         input("Orient YELLOW side towards the camera and press enter")
         yellow_bound = get_and_print_img_bound(camera, Color.YELLOW)
 
+        color_bounds = {
+            Color.GREEN: green_bound,
+            Color.ORANGE: orange_bound,
+            Color.RED: red_bound,
+            Color.BLUE: blue_bound,
+            Color.WHITE: white_bound,
+            Color.YELLOW: yellow_bound
+        }
         print("The following bounds should be used: ")
-        print("GREEN: %s" % str(green_bound))
-        print("ORANGE: %s" % str(orange_bound))
-        print("RED: %s" % str(red_bound))
-        print("BLUE: %s" % str(blue_bound))
-        print("WHITE: %s" % str(white_bound))
-        print("YELLOW: %s" % str(yellow_bound))
+        print("Color.GREEN: %s," % str(green_bound))
+        print("Color.ORANGE: %s," % str(orange_bound))
+        print("Color.RED: %s," % str(red_bound))
+        print("Color.BLUE: %s," % str(blue_bound))
+        print("Color.WHITE: %s," % str(white_bound))
+        print("Color.YELLOW: %s" % str(yellow_bound))
 
     except Exception as e:
         print("Error while executing: %s", str(e), file=sys.stderr)
