@@ -56,3 +56,8 @@ class FakeSolver:
 
     def solve(self, _):
         return self.solution_list
+
+class FakeOutput:
+
+    def print(self, _):
+        pass

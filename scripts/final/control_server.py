@@ -3,6 +3,7 @@ from communication import SerialCommunication
 from camera import Camera
 from color_detection import ColorDetector
 from solver import Solver
+from output import StandardOutput
 from transition import TransitionHandler
 from rubik_machine_state import RubikMachineState
 
@@ -12,7 +13,8 @@ camera = Camera("192.168.0.1", "80")
 first_photo_detector = ColorDetector(DEFAULT_FIRST_IMAGE_BOUND, DEFAULT_COLOR_BOUNDS)
 second_photo_detector = ColorDetector(DEFAULT_SECOND_IMAGE_BOUND, DEFAULT_COLOR_BOUNDS)
 solver = Solver()
-transition_handler = TransitionHandler(communication, camera, first_photo_detector, second_photo_detector, solver)
+output = StandardOutput()
+transition_handler = TransitionHandler(communication, camera, first_photo_detector, second_photo_detector, solver, output)
 
 # Set up finite state machine that will keep track of machine state
 machine_state = RubikMachineState(transition_handler)

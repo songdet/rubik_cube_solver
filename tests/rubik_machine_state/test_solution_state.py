@@ -12,7 +12,8 @@ def test_solution_state():
     camera = FakeCamera()
     photo_detector = FakeColorDetector([Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE, Color.ORANGE, Color.RED])
     solver = FakeSolver([Isa.HH, Isa.HV, Isa.RBC])
-    transition_handler = TransitionHandler(communication, camera, photo_detector, solver)
+    output = FakeOutput()
+    transition_handler = TransitionHandler(communication, camera, photo_detector, solver, output)
     solution_isa = [Isa.MHCCW, Isa.RRC, Isa.RBC, Isa.RLC]
     solution_state = SolutionState(solution_isa, transition_handler)    
 

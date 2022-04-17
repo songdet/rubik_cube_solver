@@ -42,12 +42,17 @@ class FakeSolver:
         print("The following solution is found %s" % repr(self._solution))
         return self._solution
 
+class FakeOutput:
+    def print(self, _):
+        pass
+
 # Set up transition handler that will be used by finite state machine to handle user input
 communication = UserInputCommunication()
 camera = FakeCamera()
 photo_detector = FakeColorDetector([Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE, Color.BLUE, Color.GREEN])
 solver = FakeSolver([Isa.HH, Isa.HV, Isa.RBC])
-transition_handler = TransitionHandler(communication, camera, photo_detector, solver)
+output = FakeOutput()
+transition_handler = TransitionHandler(communication, camera, photo_detector, solver, output)
 
 # Set up finite state machine that will keep track of machine state
 machine_state = RubikMachineState(transition_handler)

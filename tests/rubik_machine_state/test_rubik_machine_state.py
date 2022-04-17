@@ -11,7 +11,8 @@ def test_rubik_machine_state():
     camera = FakeCamera()
     photo_detector = FakeColorDetector([Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE, Color.ORANGE, Color.RED])
     solver = FakeSolver([Isa.HH, Isa.HV, Isa.RBC])
-    transition_handler = TransitionHandler(communication, camera, photo_detector, solver)
+    output = FakeOutput()
+    transition_handler = TransitionHandler(communication, camera, photo_detector, solver, output)
     machine_state = RubikMachineState(transition_handler) 
 
     # Start transition
