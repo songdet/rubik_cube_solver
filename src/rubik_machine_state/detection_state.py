@@ -32,6 +32,7 @@ class DetectionState(State):
         # Prompt user for change if necessary
         user_change = input("Enter different colors if the detection is off. Otherwise press enter: ")
         if user_change != '':
+            print("Input changed to: %s" % user_change)
             self._rubik_machine_state.set_side(self._side, user_change)
 
 

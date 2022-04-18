@@ -13,10 +13,10 @@ DEFAULT_IMAGE_BOUND = [
 ]
 
 DEFAULT_COLOR_BOUNDS = {
-    Color.GREEN: (27, 84, 44),
-    Color.ORANGE: (123, 44, 34),
-    Color.RED: (43, 15, 19),
-    Color.BLUE: (9, 41, 79),
-    Color.WHITE: (99, 115, 115),
-    Color.YELLOW: (98, 126, 62)
+    Color.GREEN: (40, 132, 64),
+    Color.ORANGE: (155, 83, 66),
+    Color.RED: (81, 29, 31),
+    Color.BLUE: (12, 66, 115),
+    Color.WHITE: (151, 159, 155),
+    Color.YELLOW: (145, 168, 109)
 }
