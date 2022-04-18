@@ -18,7 +18,7 @@ SOLUTION_TO_ISA = {
 def convert(solution: str):
 
     # Have one solution for the case where the cube is rotated and one not
-    rotated_solution = solution.translate(str.maketrans("FLBR" , "LBRF"))
+    rotated_solution = solution.translate(str.maketrans("FLBR" , "RFLB"))
 
     # We now have two list of solutions for the case when cube is rotated and not rotated
     solution = solution.split()
