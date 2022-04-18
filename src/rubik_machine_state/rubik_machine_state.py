@@ -20,11 +20,13 @@ class RubikMachineState(State):
             self._current_state.transition(data)
         elif data == b'R\n':
             # Reset state to default
+            self._transition_handler.print("Reset button pushed. Resetting machine to default state.")
             self._current_state = self._construct_default_state(self._transition_handler)
             self._sides = {}
             self._solution = []
             self._transition_handler.isa_transition(Isa.ST)
         elif data == b'S\n':
+            self._transition_handler.print("Stop button pushed. Saving state and moving to default configuration.")
             if (isinstance(self._current_state, DetectionState)):
                 # If we are in detection state, put DetectStartState as current state before stopping
                 start_state = DetectionStartState(self, self._transition_handler, self._current_state)
