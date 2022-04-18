@@ -20,7 +20,7 @@ class DetectionStartState(State):
         self._transition_handler.isa_transition(Isa.DT)
         self._transition_handler.print("====================================================================================")
         self._transition_handler.print("                                 DETECTION PHASE                                    ")
-        self._transition_handler.print("Please put GREEN side facing camera with WHITE on top and press start when ready.")
+        self._transition_handler.print("Please rotate the cube and put the {} side facing the camera".format(self._next_state._side.get_color()))
         self._rubik_machine_state.set_current_state(self._next_state)
 
         # Make sure we don't transition again
