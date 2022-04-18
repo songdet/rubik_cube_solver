@@ -51,7 +51,7 @@ class RubikMachineState(State):
     def get_cube(self):
         return Cube(
             front=self._sides[Side.FRONT],
-            back=self._sides[Side.BOTTOM],
+            back=self._sides[Side.BACK],
             left=self._sides[Side.LEFT],
             right=self._sides[Side.RIGHT],
             top=self._sides[Side.TOP],
