@@ -18,6 +18,7 @@ class DetectionState(State):
             return
         
         # Take a photo of result and set detection to parent
+        self._transition_handler.print("Waiting for camera photo.")
         detected_colors = self._transition_handler.camera_transition()
         self._rubik_machine_state.set_side(self._side, detected_colors)
         self._transition_handler.isa_transition(Isa.DT)
