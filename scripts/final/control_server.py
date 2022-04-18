@@ -29,4 +29,4 @@ while True:
     input_value = communication.readline()
     machine_state.transition(input_value)
     if machine_state.is_complete():
-        machine_state.transition(b'R\n')
+        machine_state = RubikMachineState(transition_handler)
