@@ -36,6 +36,8 @@ class RubikMachineState(State):
                 self._current_state = start_state
             # Tell machine to go back to start state
             self._transition_handler.isa_transition(Isa.ST)
+        else:
+            print("Received unmatched data %s" % data)
     
     def is_complete(self):
         return self._current_state.is_complete()

@@ -26,7 +26,7 @@ print("=========================================================================
 
 # Loop forever, receiving input from the chip and using machine state to handle it
 while True:
-    input = communication.readline()
-    machine_state.transition(input)
+    input_value = communication.readline()
+    machine_state.transition(input_value)
     if machine_state.is_complete():
         machine_state.transition(b'R\n')
