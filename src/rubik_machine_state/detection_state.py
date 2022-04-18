@@ -29,6 +29,12 @@ class DetectionState(State):
         self._transition_handler.print("[%s %s %s]" % (detected_colors[3].get_color_code(), detected_colors[4].get_color_code(), detected_colors[5].get_color_code()))
         self._transition_handler.print("[%s %s %s]" % (detected_colors[6].get_color_code(), detected_colors[7].get_color_code(), detected_colors[8].get_color_code()))
 
+        # Prompt user for change if necessary
+        user_change = "Enter different colors if the detection is off. Otherwise press enter: "
+        if user_change != '':
+            self._rubik_machine_state.set_side(self._side, user_change)
+
+
         if (self._is_last_state):
             # If this is the last detection state, prompt user to remove cube while we transition to start position
             self._transition_handler.print("")
