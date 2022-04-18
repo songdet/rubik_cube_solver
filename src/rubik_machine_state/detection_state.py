@@ -1,6 +1,4 @@
 from .state import State
-from .solution_state import SolutionState
-from .solution_start_state import SolutionStartState
 
 class DetectionState(State):
 
@@ -29,11 +27,10 @@ class DetectionState(State):
         self._transition_handler.print("[%s %s %s]" % (detected_colors[6].get_color_code(), detected_colors[7].get_color_code(), detected_colors[8].get_color_code()))
 
         if (self._is_last_state):
-            # If this is the last detection state, we already have everything to solve cube, so solve it
-            cube = self._rubik_machine_state.get_cube()
-            solution = self._transition_handler.solve_transition(cube)
-            solution_state = SolutionState(solution, self._transition_handler)
-            self._next_state = SolutionStartState(self._rubik_machine_state, self._transition_handler, solution_state)
+            # If this is the last detection state, prompt user to remove cube while we transition to start position
+            self._transition_handler.print("")
+            self._transition_handler.print("====================================================================================")
+            self._transition_handler.print("Please remove the cube and press start to compute solution.")
         else:
             # Otherwise, prompt for the next face to be shown towards the camera
             self._transition_handler.print("")

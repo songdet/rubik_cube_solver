@@ -1,3 +1,4 @@
+from rubik_machine_state.detection_end_state import DetectionEndState
 from .fake_transition_handlers import *
 from cube import Color, Side
 from solver import Isa
@@ -43,21 +44,31 @@ def test_rubik_machine_state():
     # Bottom transition
     assert machine_state.is_complete() == False
     _test_transition(machine_state, camera, Side.BOTTOM, 6) 
-    assert isinstance(machine_state._current_state, SolutionStartState)
+    assert isinstance(machine_state._current_state, DetectionEndState)
+
+    # End transistion
+    assert machine_state.is_complete() == False
+    machine_state.transition(b'O\n')
+    assert communication.written_data[-1] == Isa.ST.get_isa_number().to_bytes(1, "little")
 
     # Test solution state transition
+    assert machine_state.is_complete() == False
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.GR.get_isa_number().to_bytes(1, "little")
 
+    assert machine_state.is_complete() == False
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.HH.get_isa_number().to_bytes(1, "little")
 
+    assert machine_state.is_complete() == False
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.HV.get_isa_number().to_bytes(1, "little")
 
+    assert machine_state.is_complete() == False
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.RBC.get_isa_number().to_bytes(1, "little")
 
+    assert machine_state.is_complete() == False
     machine_state.transition(b'O\n')
     assert communication.written_data[-1] == Isa.ST.get_isa_number().to_bytes(1, "little")
     assert machine_state.is_complete() == True

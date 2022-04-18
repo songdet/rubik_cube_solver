@@ -1,5 +1,4 @@
-from numpy import isin
-from rubik_machine_state import DetectionState, DetectionStartState
+from rubik_machine_state import DetectionState, DetectionStartState, DetectionEndState
 from rubik_machine_state import SolutionState, SolutionStartState
 from solver.isa import Isa
 from .state import State
@@ -58,7 +57,8 @@ class RubikMachineState(State):
         )
 
     def _construct_default_state(self, transition_handler):
-        detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, None, True)
+        detect_end = DetectionEndState(self, transition_handler)
+        detect_bottom = DetectionState(self, Side.BOTTOM, transition_handler, detect_end, True)
         detect_top = DetectionState(self, Side.TOP, transition_handler, detect_bottom, False)
         detect_right = DetectionState(self, Side.RIGHT, transition_handler, detect_top, False)
         detect_back = DetectionState(self, Side.BACK, transition_handler, detect_right, False)

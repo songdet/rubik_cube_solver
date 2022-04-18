@@ -31,5 +31,4 @@ def test_detection_state():
     detection_state_1.transition(b'')
     assert len(camera.taken_photos) == 2
     assert parent_state.sides[Side.TOP] == [Color.BLUE, Color.GREEN, Color.ORANGE, Color.ORANGE, Color.WHITE, Color.WHITE, Color.WHITE, Color.ORANGE, Color.RED]
-    assert parent_state.current_state._next_state._solution_isa == [Isa.HH, Isa.HV, Isa.RBC, Isa.ST]
     assert detection_state_1.is_complete() == True

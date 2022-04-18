@@ -1,4 +1,4 @@
-from color_detection.defaults import DEFAULT_COLOR_BOUNDS, DEFAULT_FIRST_IMAGE_BOUND, DEFAULT_SECOND_IMAGE_BOUND
+from color_detection.defaults import DEFAULT_COLOR_BOUNDS, DEFAULT_IMAGE_BOUND
 from communication import SerialCommunication
 from camera import Camera
 from color_detection import ColorDetector
@@ -9,12 +9,11 @@ from rubik_machine_state import RubikMachineState
 
 # Set up transition handler that will be used by finite state machine to handle user input
 communication = SerialCommunication('/dev/ttyUSB0', 9600)
-camera = Camera("192.168.0.1", "80")
-first_photo_detector = ColorDetector(DEFAULT_FIRST_IMAGE_BOUND, DEFAULT_COLOR_BOUNDS)
-second_photo_detector = ColorDetector(DEFAULT_SECOND_IMAGE_BOUND, DEFAULT_COLOR_BOUNDS)
+camera = Camera("192.168.4.1", "80")
+photo_detector = ColorDetector(DEFAULT_IMAGE_BOUND, DEFAULT_COLOR_BOUNDS)
 solver = Solver()
 output = StandardOutput()
-transition_handler = TransitionHandler(communication, camera, first_photo_detector, second_photo_detector, solver, output)
+transition_handler = TransitionHandler(communication, camera, photo_detector, solver, output)
 
 # Set up finite state machine that will keep track of machine state
 machine_state = RubikMachineState(transition_handler)

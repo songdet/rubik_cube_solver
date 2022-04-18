@@ -1,5 +1,6 @@
 from .detection_state import DetectionState
 from .detection_start_state import DetectionStartState
+from .detection_end_state import DetectionEndState
 from .solution_state import SolutionState
 from .solution_start_state import SolutionStartState
 from .rubik_machine_state import RubikMachineState
