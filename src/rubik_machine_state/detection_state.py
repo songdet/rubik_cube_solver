@@ -1,4 +1,5 @@
 from .state import State
+from solver import Isa
 
 class DetectionState(State):
 
@@ -19,6 +20,7 @@ class DetectionState(State):
         # Take a photo of result and set detection to parent
         detected_colors = self._transition_handler.camera_transition()
         self._rubik_machine_state.set_side(self._side, detected_colors)
+        self._transition_handler.isa_transition(Isa.DT)
 
         # Report the detected colors 
         self._transition_handler.print("The following colors are detected: ")
